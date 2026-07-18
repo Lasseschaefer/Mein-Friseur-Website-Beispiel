@@ -20,6 +20,10 @@ Diese Website wurde als moderne Beispiel-Website für einen Friseursalon entwick
 - CSS3
 - JavaScript
 
+## 🌐 Live-Demo
+
+https://friseuwebsitebeispiel.web-developement.workers.dev
+
 ## 🎯 Ziel
 
 Das Ziel dieses Projekts war es, eine moderne und benutzerfreundliche Website für einen Friseursalon zu entwickeln. Sie dient als Beispiel dafür, wie kleine Unternehmen ihre Dienstleistungen professionell im Internet präsentieren können.

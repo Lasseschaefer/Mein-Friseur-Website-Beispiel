@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salon Name – Ihr Friseur</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #C9A96E;
+            --dark: #1A1A1A;
+            --light: #FAFAFA;
+            --gray: #888;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background: #fff;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            padding: 1rem 5%;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        nav.scrolled .logo {
+            color: var(--dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav.scrolled .nav-links a {
+            color: var(--dark);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 400;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            animation: fadeUp 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            animation: fadeUp 1s ease 0.2s both;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--gold);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 2px solid var(--gold);
+            transition: all 0.3s ease;
+            animation: fadeUp 1s ease 0.4s both;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #fff;
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: #fff;
+            color: var(--dark);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .gold-line {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 1rem auto;
+        }
+
+        /* About */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-img {
+            position: relative;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--gold);
+        }
+
+        .about-img-placeholder {
+            text-align: center;
+            color: var(--gold);
+            padding: 2rem;
+        }
+
+        .about-img-placeholder .icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.6;
+        }
+
+        .about-img-placeholder p {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        .about-img::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--gold);
+            z-index: -1;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        /* Services */
+        .services {
+            background: var(--light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .price {
+            display: block;
+            margin-top: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .gallery-placeholder {
+            text-align: center;
+            color: var(--gold);
+            padding: 1rem;
+        }
+
+        .gallery-placeholder .num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            opacity: 0.4;
+        }
+
+        .gallery-placeholder p {
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+            opacity: 0.7;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay span {
+            color: #fff;
+            font-size: 1rem;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 2px;
+        }
+
+        /* Team */
+        .team {
+            background: var(--dark);
+            color: #fff;
+        }
+
+        .team .section-header h2,
+        .team .section-header p {
+            color: #fff;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .team-avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #333 0%, #222 100%);
+            border: 3px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--gold);
+        }
+
+        .team-member h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            color: var(--gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Contact */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item strong {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .info-item p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .contact-form {
+            background: var(--light);
+            padding: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            background: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Legal Sections */
+        .legal-section {
+            background: var(--light);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+        }
+
+        .legal-section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        .legal-section h3 {
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .legal-section p, .legal-section li {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .legal-section ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .legal-section a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .legal-section a:hover {
+            text-decoration: underline;
+        }
+
+        .legal-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            color: #856404;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: #fff;
+            text-align: center;
+            padding: 3rem 5%;
+        }
+
+        footer .logo {
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        footer p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .socials a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .socials a:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--dark);
+            color: #fff;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            z-index: 9999;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .cookie-banner.show {
+            transform: translateY(0);
+        }
+
+        .cookie-banner p {
+            font-size: 0.9rem;
+            color: #ccc;
+            max-width: 800px;
+        }
+
+        .cookie-banner a {
+            color: var(--gold);
+            text-decoration: underline;
+        }
+
+        .cookie-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--gold);
+            color: #fff;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.3s;
+        }
+
+        .cookie-btn:hover {
+            background: #b8985a;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .about,
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-img::before {
+                display: none;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+
+            .cookie-banner {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .team-avatar {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">SALON</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">Über uns</a></li>
+            <li><a href="#services">Leistungen</a></li>
+            <li><a href="#gallery">Galerie</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Salon Name</h1>
+            <p>Stil. Eleganz. Perfektion.</p>
+            <a href="#contact" class="btn">Termin buchen</a>
+            <a href="#services" class="btn btn-outline">Leistungen</a>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <div class="about">
+            <div class="about-img">
+                <div class="about-img-placeholder">
+                    <div class="icon">◆</div>
+                    <p>Eigenes Salonfoto einfügen</p>
+                </div>
+            </div>
+            <div class="about-text">
+                <h2>Willkommen in unserem Salon</h2>
+                <div class="gold-line" style="margin: 1rem 0;"></div>
+                <p>In unserem Friseursalon in Boffzen steht Ihre individuelle Schönheit im Mittelpunkt. Mit Leidenschaft, Präzision und hochwertigen Produkten kreieren wir Looks, die zu Ihnen passen.</p>
+                <p>Ob klassischer Schnitt, trendige Coloration oder aufwendiges Brautstyling – unser erfahrenes Team berät Sie persönlich und kompetent. Vertrauen Sie auf Handwerkskunst, die begeistert.</p>
+                <a href="#contact" class="btn">Mehr erfahren</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>Unsere Leistungen</h2>
+            <div class="gold-line"></div>
+            <p>Individuelle Beratung und professionelle Umsetzung für Ihren perfekten Look.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">✂</div>
+                <h3>Damen</h3>
+                <p>Schneiden, Föhnen, Stylen – alles für den perfekten Look.</p>
+                <span class="price">ab 45 €</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">✦</div>
+                <h3>Herren</h3>
+                <p>Präzisionsschnitte, Bartpflege und klassische Rasur.</p>
+                <span class="price">ab 35 €</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">✿</div>
+                <h3>Coloration</h3>
+                <p>Strähnen, Balayage, Ansatz oder komplette Neufärbung.</p>
+                <span class="price">ab 65 €</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">♛</div>
+                <h3>Treatments</h3>
+                <p>Keratin, Olaplex und Pflegepackungen für gesundes Haar.</p>
+                <span class="price">ab 55 €</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">✽</div>
+                <h3>Hochzeit</h3>
+                <p>Brautstyling und Brautjungfern-Look für den großen Tag.</p>
+                <span class="price">ab 120 €</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">✤</div>
+                <h3>Kinder</h3>
+                <p>Schnelle, stressfreie Schnitte für die Kleinen.</p>
+                <span class="price">ab 25 €</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery">
+        <div class="section-header">
+            <h2>Galerie</h2>
+            <div class="gold-line"></div>
+            <p>Unsere neuesten Kreationen und Styles. Alle Bilder werden mit Einverständnis der Kunden veröffentlicht.</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <div class="num">01</div>
+                    <p>Eigenes Bild</p>
+                </div>
+                <div class="gallery-overlay"><span>Style 1</span></div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <div class="num">02</div>
+                    <p>Eigenes Bild</p>
+                </div>
+                <div class="gallery-overlay"><span>Style 2</span></div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <div class="num">03</div>
+                    <p>Eigenes Bild</p>
+                </div>
+                <div class="gallery-overlay"><span>Style 3</span></div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <div class="num">04</div>
+                    <p>Eigenes Bild</p>
+                </div>
+                <div class="gallery-overlay"><span>Style 4</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team" id="team">
+        <div class="section-header">
+            <h2>Unser Team</h2>
+            <div class="gold-line"></div>
+            <p>Die kreativen Köpfe hinter jedem perfekten Schnitt.</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="team-avatar">LS</div>
+                <h3>Lasse Schäfer</h3>
+                <p>Salonleiter</p>
+            </div>
+            <div class="team-member">
+                <div class="team-avatar">M2</div>
+                <h3>Teammitglied 2</h3>
+                <p>Colorist/in</p>
+            </div>
+            <div class="team-member">
+                <div class="team-avatar">M3</div>
+                <h3>Teammitglied 3</h3>
+                <p>Stylist/in</p>
+            </div>
+            <div class="team-member">
+                <div class="team-avatar">M4</div>
+                <h3>Teammitglied 4</h3>
+                <p>Stylist/in</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <h3>Kontakt & Öffnungszeiten</h3>
+                
+                <div class="info-item">
+                    <div>
+                        <strong>Adresse</strong>
+                        <p>Trift 1a<br>37691 Boffzen</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div>
+                        <strong>Telefon</strong>
+                        <p>Bitte Telefonnummer ergänzen</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div>
+                        <strong>E-Mail</strong>
+                        <p><a href="mailto:lasseschafer87@gmail.com" style="color: var(--dark);">lasseschafer87@gmail.com</a></p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div>
+                        <strong>Öffnungszeiten</strong>
+                        <p>Mo – Fr: 09:00 – 19:00<br>Sa: 09:00 – 16:00</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 2rem;">Termin anfragen</h3>
+                <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Vielen Dank für Ihre Anfrage! Wir melden uns bei Ihnen.');">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Ihr Name *" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Ihre E-Mail *" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="phone" placeholder="Telefonnummer">
+                    </div>
+                    <div class="form-group">
+                        <select name="service">
+                            <option value="">Dienstleistung wählen</option>
+                            <option value="damen">Damen</option>
+                            <option value="herren">Herren</option>
+                            <option value="coloration">Coloration</option>
+                            <option value="treatment">Treatment</option>
+                            <option value="hochzeit">Hochzeit</option>
+                            <option value="kinder">Kinder</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Ihre Nachricht"></textarea>
+                    </div>
+                    <div class="form-group" style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.85rem; color: var(--gray);">
+                        <input type="checkbox" id="privacy" name="privacy" required style="width: auto; margin-top: 0.2rem;">
+                        <label for="privacy">Ich stimme zu, dass meine Angaben zur Bearbeitung der Anfrage gespeichert werden. Hinweis: Sie können Ihre Einwilligung jederzeit per E-Mail an lasseschafer87@gmail.com widerrufen. Detaillierte Informationen finden Sie in unserer <a href="#datenschutz" style="color: var(--gold);">Datenschutzerklärung</a>.</label>
+                    </div>
+                    <button type="submit" class="btn" style="border: none; cursor: pointer; width: 100%;">Anfrage senden</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impressum -->
+    <section class="legal-section" id="impressum">
+        <h2>Impressum</h2>
+        <div class="gold-line" style="margin: 1rem 0 2rem 0;"></div>
+        
+        <p><strong>Angaben gemäß § 5 TMG:</strong></p>
+        <p style="margin-bottom: 2rem;">
+            Lasse Schäfer<br>
+            Salon Name<br>
+            Trift 1a<br>
+            37691 Boffzen
+        </p>
+
+        <p><strong>Kontakt:</strong></p>
+        <p style="margin-bottom: 2rem;">
+            Telefon: Bitte ergänzen<br>
+            E-Mail: <a href="mailto:lasseschafer87@gmail.com">lasseschafer87@gmail.com</a>
+        </p>
+
+        <p><strong>Umsatzsteuer-ID:</strong></p>
+        <p style="margin-bottom: 2rem;">
+            Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+            [Bitte ergänzen, falls vorhanden]
+        </p>
+
+        <p><strong>Berufsbezeichnung und berufsrechtliche Regelungen:</strong></p>
+        <p style="margin-bottom: 2rem;">
+            Berufsbezeichnung: Friseur/Friseurmeister<br>
+            Verliehen in: Deutschland<br>
+            Es gelten folgende berufsrechtliche Regelungen: [Bitte ergänzen]
+        </p>
+
+        <p><strong>Streitschlichtung:</strong></p>
+        <p style="margin-bottom: 2rem;">
+            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: 
+            <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>.<br>
+            Unsere E-Mail-Adresse finden Sie oben im Impressum.<br><br>
+            Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+
+        <p><strong>Haftung für Inhalte:</strong></p>
+        <p style="margin-bottom: 2rem;">
+            Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+        </p>
+
+        <p><strong>Haftung für Links:</strong></p>
+        <p style="margin-bottom: 2rem;">
+            Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+        </p>
+
+        <p><strong>Urheberrecht:</strong></p>
+        <p>
+            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
+        </p>
+    </section>
+
+    <!-- Datenschutz -->
+    <section class="legal-section" id="datenschutz" style="background: #fff;">
+        <h2>Datenschutzerklärung</h2>
+        <div class="gold-line" style="margin: 1rem 0 2rem 0;"></div>
+
+        <div class="legal-notice">
+            <strong>Hinweis:</strong> Diese Datenschutzerklärung ist ein Standard-Entwurf. Für absolute Rechtssicherheit empfehlen wir die Prüfung durch einen Fachanwalt oder die Nutzung eines Datenschutz-Generators (z. B. e-recht24.de).
+        </div>
+
+        <h3>1. Datenschutz auf einen Blick</h3>
+        <p><strong>Allgemeine Hinweise</strong></p>
+        <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.</p>
+
+        <p><strong>Datenerfassung auf dieser Website</strong></p>
+        <p><em>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</em></p>
+        <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.</p>
+
+        <p><em>Wie erfassen wir Ihre Daten?</em></p>
+        <p>Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen (z. B. über das Kontaktformular). Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst.</p>
+
+        <p><em>Wofür nutzen wir Ihre Daten?</em></p>
+        <p>Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.</p>
+
+        <h3>2. Allgemeine Hinweise und Pflichtinformationen</h3>
+        <p><strong>Datenschutz</strong></p>
+        <p>Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
+
+        <p><strong>Verantwortliche Stelle</strong></p>
+        <p>
+            Lasse Schäfer<br>
+            Salon Name<br>
+            Trift 1a<br>
+            37691 Boffzen<br>
+            E-Mail: <a href="mailto:lasseschafer87@gmail.com">lasseschafer87@gmail.com</a>
+        </p>
+
+        <p><strong>Speicherdauer</strong></p>
+        <p>Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung entfällt.</p>
+
+        <p><strong>SSL- bzw. TLS-Verschlüsselung</strong></p>
+        <p>Diese Seite nutzt aus Sicherheitsgründen eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://“ auf „https://“ wechselt.</p>
+
+        <h3>3. Datenerfassung auf dieser Website</h3>
+        <p><strong>Kontaktformular</strong></p>
+        <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+        <p>Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).</p>
+
+        <p><strong>Anfrage per E-Mail oder Telefon</strong></p>
+        <p>Wenn Sie uns per E-Mail oder Telefon kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten zum Zwecke der Bearbeitung Ihres Anliegens bei uns gespeichert und verarbeitet.</p>
+
+        <h3>4. Ihre Rechte</h3>
+        <p>Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht auf Widerspruch, auf Datenübertragbarkeit und ein Recht auf Beschwerde bei der zuständigen Aufsichtsbehörde.</p>
+        <p>Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit an uns wenden.</p>
+
+        <h3>5. Hosting</h3>
+        <p>Diese Website wird bei einem externen Dienstleister gehostet (Hoster). [Bitte Hoster und ggf. Auftragsverarbeitungsvertrag ergänzen]</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="logo" style="color: #fff;">SALON</div>
+        <div class="socials">
+            <a href="#" aria-label="Instagram">IG</a>
+            <a href="#" aria-label="Facebook">FB</a>
+            <a href="#" aria-label="WhatsApp">WA</a>
+        </div>
+        <div class="footer-links">
+            <a href="#impressum">Impressum</a>
+            <a href="#datenschutz">Datenschutz</a>
+        </div>
+        <p>© 2026 Salon Name – Lasse Schäfer. Alle Rechte vorbehalten.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Alle Bilder dieser Website sind entweder Eigentum des Betreibers oder als Platzhalter gekennzeichnet.</p>
+    </footer>
+
+    <!-- Cookie Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <p>
+            Diese Website verwendet keine Cookies zu Tracking- oder Analysezwecken. 
+            Technisch notwendige Daten werden nur zur Bereitstellung der Website verarbeitet. 
+            Mehr Informationen finden Sie in unserer <a href="#datenschutz">Datenschutzerklärung</a>.
+        </p>
+        <button class="cookie-btn" onclick="document.getElementById('cookieBanner').classList.remove('show');">Verstanden</button>
+    </div>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Show cookie banner after short delay
+        setTimeout(() => {
+            document.getElementById('cookieBanner').classList.add('show');
+        }, 1000);
+    </script>
+
+</body>
+</html>
